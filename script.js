@@ -36,16 +36,16 @@ const operate = (numberA, numberB, operator) => {
   switch (operator) {
     case "add":
         
-      result = add(numberA, numberB);
+      result = parseFloat(add(numberA, numberB).toFixed(3));
       break;
     case "sub":
-      result = substract(numberA, numberB);
+      result = parseFloat(substract(numberA, numberB).toFixed(3));
       break;
     case "div":
-      result = divide(numberA, numberB);
+      result = parseFloat(divide(numberA, numberB).toFixed(3));
       break;
     case "mul":
-      result = multiply(numberA, numberB);
+      result = parseFloat(multiply(numberA, numberB).toFixed(3));
       break;
     default:
       result = parseFloat(operation);
