@@ -7,6 +7,7 @@ const substractBtn = document.getElementById("btn-substract");
 const multiplyBtn = document.getElementById("btn-multiply");
 const divideBtn = document.getElementById("btn-divide");
 const clearBtn = document.getElementById("btn-clear");
+const pointBtn = document.getElementById("btn-point");
 
 //Global variables
 let operation = "";
@@ -14,6 +15,7 @@ let numberA = 0;
 let numberB = 0;
 let operator = "";
 let result = 0;
+let isDecimal = false;
 
 //Operations
 const add = (a, b) => {
@@ -32,19 +34,20 @@ const divide = (a, b) => {
 const operate = (numberA, numberB, operator) => {
   switch (operator) {
     case "add":
+        
       result = add(numberA, numberB);
       break;
     case "sub":
       result = substract(numberA, numberB);
       break;
     case "div":
-      result = divide(numberA, numberB);
+      result = divide(numberA, numberB).toFixed(6);
       break;
     case "mul":
-      result = multiply(numberA, numberB);
+      result = multiply(numberA, numberB).toFixed(6);
       break;
     default:
-      result = parseInt(operation);
+      result = parseFloat(operation);
       break;
   }
 };
@@ -55,6 +58,7 @@ const updateDisplay = () => {
   display.textContent = operation;
 };
 const clear = () => {
+  isDecimal = false;
   operation = "";
   operator = "";
   numberA = 0;
@@ -75,7 +79,8 @@ allBtns.forEach((btn) => {
 addBtn.addEventListener("click", () => {
   if (operator !== "") {
   } else {
-    numberA = parseInt(operation);
+    isDecimal = false;
+    numberA = parseFloat(operation);
     operator = "add";
     operation = "";
     updateDisplay();
@@ -84,7 +89,8 @@ addBtn.addEventListener("click", () => {
 substractBtn.addEventListener("click", () => {
   if (operator !== "") {
   } else {
-    numberA = parseInt(operation);
+    isDecimal = false;
+    numberA = parseFloat(operation);
     operator = "sub";
     operation = "";
     updateDisplay();
@@ -93,7 +99,8 @@ substractBtn.addEventListener("click", () => {
 divideBtn.addEventListener("click", () => {
   if (operator !== "") {
   } else {
-    numberA = parseInt(operation);
+    isDecimal = false;
+    numberA = parseFloat(operation);
     operator = "div";
     operation = "";
     updateDisplay();
@@ -102,16 +109,27 @@ divideBtn.addEventListener("click", () => {
 multiplyBtn.addEventListener("click", () => {
   if (operator !== "") {
   } else {
-    numberA = parseInt(operation);
+    isDecimal = false;
+    numberA = parseFloat(operation);
     operator = "mul";
     operation = "";
     updateDisplay();
   }
 });
 
+pointBtn.addEventListener("click", (e) => {
+  if (isDecimal) {
+    return;
+  }
+  isDecimal = true;
+  updateOperation(e.target.value);
+  updateDisplay();
+});
+
 //Performing operations
 equalBtn.addEventListener("click", () => {
-  numberB = parseInt(operation);
+  isDecimal = false;
+  numberB = parseFloat(operation);
   operate(numberA, numberB, operator);
   operation = result;
   updateDisplay();
