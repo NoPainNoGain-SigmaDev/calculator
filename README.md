@@ -1,7 +1,7 @@
 # 🧮 Calculator
 
 A simple calculator built with HTML, CSS, and JavaScript.  
-Currently supports basic addition — more operations coming soon!
+Now supports **addition, subtraction, multiplication, and division**.
 
 ---
 
