@@ -7,6 +7,7 @@ const substractBtn = document.getElementById("btn-substract");
 const multiplyBtn = document.getElementById("btn-multiply");
 const divideBtn = document.getElementById("btn-divide");
 const clearBtn = document.getElementById("btn-clear");
+const deleteBtn = document.getElementById("btn-del");
 const pointBtn = document.getElementById("btn-point");
 
 //Global variables
@@ -41,10 +42,10 @@ const operate = (numberA, numberB, operator) => {
       result = substract(numberA, numberB);
       break;
     case "div":
-      result = divide(numberA, numberB).toFixed(6);
+      result = divide(numberA, numberB);
       break;
     case "mul":
-      result = multiply(numberA, numberB).toFixed(6);
+      result = multiply(numberA, numberB);
       break;
     default:
       result = parseFloat(operation);
@@ -117,6 +118,7 @@ multiplyBtn.addEventListener("click", () => {
   }
 });
 
+//Adding decimal point
 pointBtn.addEventListener("click", (e) => {
   if (isDecimal) {
     return;
@@ -124,6 +126,17 @@ pointBtn.addEventListener("click", (e) => {
   isDecimal = true;
   updateOperation(e.target.value);
   updateDisplay();
+});
+
+
+deleteBtn.addEventListener("click", ()=>{
+    let operationArr = [...operation];
+    //If the point is removed the user should be able to add it again
+    if(operationArr.pop() === "."){
+        isDecimal=false;
+    };
+    operation = operationArr.join("");
+    updateDisplay();
 });
 
 //Performing operations
